@@ -1,5 +1,4 @@
 from asyncirc import irc
-from asyncirc.plugins import tracking
 import blinker
 import config
 

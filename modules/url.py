@@ -1,8 +1,8 @@
+import bot
 import re
 import requests
 url_regex = re.compile("(https?|ftp)://[^\s/$.?#].[^\s]*")
 
-from blinker import signal
 from bs4 import BeautifulSoup
 
 import chanconfig
@@ -20,5 +20,4 @@ def url_title(message, user, target, text):
 
         message.client.say(target, "{}: {}".format(user.nick, title))
 
-import bot
 bot.connect_signal("public-message", url_title)

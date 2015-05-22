@@ -3,7 +3,6 @@ from asyncirc.irc import User
 
 from bot import connect_signal
 from modules.commands import command
-from blinker import signal
 from models import LogMessage, TrackingEntry
 
 import redis

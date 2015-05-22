@@ -1,5 +1,4 @@
 from modules.commands import command
-from asyncirc.plugins import tracking
 
 @command("quote", (1, 1), {"admin"})
 def ircquote(bot, data, args):
