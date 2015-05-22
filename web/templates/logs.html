@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Logs</title>
+    </head>
+    <body>
+        <div style="font-family: monospace;">
+            {% for message in messages %}
+            {{ message.time.isoformat() }} <strong>{{ ("&nbsp;" * (20 - message.hostmask.split("!")[0].__len__())) | safe }} {{ message.hostmask.split("!")[0] }} </strong> | {{ message.message }}<br />
+            {% endfor %}
+        </div>
+        <script>setTimeout(function() {window.scrollTo(0,999999)}, 30);</script>
+    </body>
+</div>
