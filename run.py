@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import bot
 import os
 import logging
