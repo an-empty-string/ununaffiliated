@@ -2,8 +2,6 @@ from asyncirc import irc
 from asyncirc.plugins import tracking
 import blinker
 import config
-import os
-from models import *
 
 connected_signals = []
 def connect_signal(signal_name, func):

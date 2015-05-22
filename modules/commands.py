@@ -1,6 +1,6 @@
 from bot import connect_signal
 from asyncirc.plugins import tracking
-from models import *
+from models import PermissionMapping
 import chanconfig
 import collections
 import fnmatch

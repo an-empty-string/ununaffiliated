@@ -9,7 +9,7 @@ def get_help(bot, data, args):
     if len(args) == 0:
         account = tracking.get_user(data["user"].hostmask).account
         permissions = {p.permission for p in PermissionMapping.select().where(PermissionMapping.account == account) if fnmatch.fnmatch(data["reply_target"], p.channel)} | {"default"}
-        commands = sorted([i for i in command_registry if command_registry[i].permission & permissions and not command_registry[i].alias and not comamnd_registry[i].flags & Flags.HELP_OMIT])
+        commands = sorted([i for i in command_registry if command_registry[i].permission & permissions and not command_registry[i].alias and not command_registry[i].flags & Flags.HELP_OMIT])
         bot.say(data["reply_target"], ", ".join(commands))
     else:
         docstr = command_registry.get(args[0], None)

@@ -1,5 +1,5 @@
 from config import database
-from peewee import *
+from peewee import Model, TextField, DateTimeField
 import datetime
 
 
