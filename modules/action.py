@@ -15,6 +15,6 @@ def handle_action(message, user, target, text):
         if get_config_key(target, "disable"):
             return
 
-        bot.say(target, "\x01ACTION " +  " ".join(args[1:-1]) + " " + user.nick + "\x01")
+        bot.say(target, "\x01ACTION " + " ".join(args[1:-1]) + " " + user.nick + "\x01")
 
 connect_signal("public-message", handle_action)

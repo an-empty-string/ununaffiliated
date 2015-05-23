@@ -3,7 +3,6 @@ from modules.commands import command
 from asyncirc.plugins import tracking
 from chanconfig import get_config_key
 import collections
-import time
 
 op_queue = collections.defaultdict(list)
 

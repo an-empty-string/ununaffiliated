@@ -1,4 +1,4 @@
-from models import *
+from models import ChannelConfig
 import json
 
 def get_config_key(channel, key):

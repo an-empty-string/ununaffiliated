@@ -1,8 +1,10 @@
 from config import database
-from peewee import *
+from peewee import Model, TextField, DateTimeField
 import datetime
 
+
 class BaseModel(Model):
+
     class Meta:
         database = database
 
@@ -33,3 +35,5 @@ class TrackingEntry(BaseModel):
     channel = TextField()
     mtype = TextField()
     seen = DateTimeField(default=datetime.datetime.now)
+
+tables = [PermissionMapping, ChannelConfig, LogMessage, TrackingEntry]

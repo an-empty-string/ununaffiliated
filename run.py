@@ -1,4 +1,4 @@
-import bot
+#!/usr/bin/env python
 import os
 import logging
 import importlib

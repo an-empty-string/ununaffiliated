@@ -3,8 +3,7 @@ from asyncirc.irc import User
 
 from bot import connect_signal
 from modules.commands import command
-from blinker import signal
-from models import *
+from models import LogMessage, TrackingEntry
 
 import redis
 r = redis.StrictRedis()
@@ -42,8 +41,8 @@ def loggrep(bot, data, args):
     """Search through channel logs for a string."""
     search = args[0]
     r = list(LogMessage.select()
-                      .where(LogMessage.channel == data["target"], LogMessage.message ** "%{}%".format(search))
-                      .order_by(LogMessage.time.desc()))
+             .where(LogMessage.channel == data["target"], LogMessage.message ** "%{}%".format(search))
+             .order_by(LogMessage.time.desc()))
     if r:
         r = r[0]
         bot.say(data["reply_target"], "{} <{}> {}".format(r.time.strftime("%b %e, %Y %r"), User.from_hostmask(r.hostmask).nick, r.message))
