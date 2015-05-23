@@ -5,7 +5,7 @@ import asyncirc.plugins.sasl
 from peewee import SqliteDatabase
 
 account = "ununaffiliated"
-password = "Ayylmao123!"
+password = "Ayylmao123!"  # This is not my actual password but nice try
 
 nickname = "ununaffiliated"
 ident = "fwilson"
