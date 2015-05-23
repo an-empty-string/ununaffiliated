@@ -7,7 +7,7 @@ def weather(bot, data, args):
     resp = get("http://api.openweathermap.org/data/2.5/weather", params=dict(q=query)).json()
 
     location = resp["name"]
-    temp = (resp["main"]["temp"] - 273.15)*1.8 + 32
+    temp = (resp["main"]["temp"] - 273.15) * 1.8 + 32
     degree = "F"
     temp = round(temp, 2)
     humid = resp["main"]["humidity"]

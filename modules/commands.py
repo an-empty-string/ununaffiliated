@@ -16,6 +16,7 @@ command_registry = {}
 def command(name, arg_range=(0, 0), permission={"default"}, flags=0):
     if isinstance(name, str):
         name = [name]
+
     def magic(f):
         for i, n in enumerate(name):
             command_registry.update({n: CommandInfo(arg_range, permission, f, flags, name[0] if i > 0 else False)})

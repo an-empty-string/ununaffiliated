@@ -41,8 +41,8 @@ def loggrep(bot, data, args):
     """Search through channel logs for a string."""
     search = args[0]
     r = list(LogMessage.select()
-                      .where(LogMessage.channel == data["target"], LogMessage.message ** "%{}%".format(search))
-                      .order_by(LogMessage.time.desc()))
+             .where(LogMessage.channel == data["target"], LogMessage.message ** "%{}%".format(search))
+             .order_by(LogMessage.time.desc()))
     if r:
         r = r[0]
         bot.say(data["reply_target"], "{} <{}> {}".format(r.time.strftime("%b %e, %Y %r"), User.from_hostmask(r.hostmask).nick, r.message))
