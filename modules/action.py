@@ -5,7 +5,7 @@ def handle_action(message, user, target, text):
 
     if text.endswith("\x01"):
         text = text[:-1]
-    args = text.strip().split()
+    args = text.lower().strip().split()
     bot = message.client
 
     if args[0].lower() != "\x01action":
