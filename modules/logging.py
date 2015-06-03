@@ -5,6 +5,7 @@ from bot import connect_signal
 from modules.commands import command
 from models import LogMessage, TrackingEntry
 
+import chanconfig
 import redis
 r = redis.StrictRedis()
 p = r.pubsub()
@@ -36,12 +37,20 @@ connect_signal("part", on_part)
 connect_signal("quit", on_quit)
 connect_signal("nick", on_nick)
 
-@command("loggrep", (1, 1))
+@command("loggrep", (1, 2))
 def loggrep(bot, data, args):
     """Search through channel logs for a string."""
-    search = args[0]
+    if len(args) == 2:
+        chan = args[0]
+        search = args[1]
+    else:
+        chan = data["target"]
+        search = args[0]
+    if not chanconfig.get_config_key(chan, "loggrep"):
+        bot.say(data["reply_target"], "No thanks.")
+        return
     r = list(LogMessage.select()
-             .where(LogMessage.channel == data["target"], LogMessage.message ** "%{}%".format(search))
+             .where(LogMessage.channel == chan, LogMessage.message ** "%{}%".format(search))
              .order_by(LogMessage.time.desc()))
     if r:
         r = r[0]

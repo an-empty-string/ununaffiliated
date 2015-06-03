@@ -29,3 +29,8 @@ def permission(bot, data, args):
                 bot.say(data["reply_target"], "{},{} taken from {}.".format(chan, perm, args[0]))
             else:
                 bot.say(data["reply_target"], "{} already has {}.".format(*args))
+
+@command("whohas", (1, 1), {"admin"})
+def whohas(bot, data, args):
+    """Get a list of users that have permissions."""
+    bot.say(data["reply_target"], ", ".join(["{} ({})".format(i.account, i.channel) for i in PermissionMapping.select().where(PermissionMapping.permission == args[0])]))

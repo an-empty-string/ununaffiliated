@@ -9,7 +9,7 @@ import chanconfig
 
 def url_title(message, user, target, text):
     match = url_regex.match(text)
-    if match:
+    if match and False:
         if not chanconfig.get_config_key(target, "url"):
             return
         url = match.group(0)

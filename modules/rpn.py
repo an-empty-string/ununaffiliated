@@ -5,12 +5,17 @@ import operator
 def rpn(bot, data, args):
     stack = []
     operators = {"+": (operator.add, 2), "-": (operator.sub, 2), "*": (operator.mul, 2), "/": (operator.truediv, 2)}
+    special = {"f": reversed}
     for i in args:
         if all(k in "0123456789." for k in i) and i.count(".") <= 1 and ("-" not in i[1:]):
             stack.append(float(i))
         else:
             if i not in operators:
-                return bot.say(data["reply_target"], "Unknown operator {}.".format(i))
+                if i in special:
+                    stack = list(special[i](stack))
+                    continue
+                else:
+                    return bot.say(data["reply_target"], "Unknown operator {}.".format(i))
             opargs = []
             for k in range(operators[i][1]):
                 opargs.append(stack.pop())
