@@ -10,7 +10,7 @@ def request_chanserv_op(bot, channel):
     bot.say("ChanServ", "OP {}".format(channel))
 
 def request_or_use_op(bot, channel):
-    if get_config_key(channel, "persistop"):
+    if get_config_key(channel, "op.keep"):
         run_queue(bot, channel)
     else:
         request_chanserv_op(bot, channel)
@@ -25,7 +25,7 @@ def process_queue(message, arg, user, channel):
 
     run_queue(message.client, channel)
 
-    if not get_config_key(channel, "persistop"):
+    if not get_config_key(channel, "op.keep"):
         message.client.writeln("MODE {} -o {}".format(channel, message.client.nickname))
 
 connect_signal("mode +o", process_queue)

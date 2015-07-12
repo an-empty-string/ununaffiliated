@@ -36,4 +36,7 @@ class TrackingEntry(BaseModel):
     mtype = TextField()
     seen = DateTimeField(default=datetime.datetime.now)
 
+class InventoryItem(BaseModel):
+    thing = TextField()
+
 tables = [PermissionMapping, ChannelConfig, LogMessage, TrackingEntry]

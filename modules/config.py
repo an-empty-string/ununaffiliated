@@ -1,10 +1,14 @@
 import chanconfig
 import json
 from modules.commands import command, Flags
+from models import ChannelConfig
 
-@command("config", (1, 2), {"admin", "op"}, Flags.BYPASS_ENABLE)
+@command("config", (0, 2), {"admin", "op"}, Flags.BYPASS_ENABLE)
 def config(bot, data, args):
     """Get the value of a configuration key in this channel (config [key]) or set one (config [key] [value])."""
+    if len(args) == 0:
+        s = list(map(lambda c: "{} -> {} ({})".format(c.key, c.value, c.channel), sorted(ChannelConfig.select().where(ChannelConfig.channel << [data["reply_target"], "*"]), key=lambda c: c.key)))
+        return bot.say(data["reply_target"], ", ".join(s))
     if len(args) == 1:
         return bot.say(data["reply_target"], json.dumps(chanconfig.get_config_key(data["reply_target"], args[0])))
     chanconfig.set_config_key(data["reply_target"], args[0], json.loads(args[1]))

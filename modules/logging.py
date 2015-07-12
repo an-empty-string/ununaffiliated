@@ -46,7 +46,7 @@ def loggrep(bot, data, args):
     else:
         chan = data["target"]
         search = args[0]
-    if not chanconfig.get_config_key(chan, "loggrep"):
+    if not chanconfig.get_config_key(chan, "log.allow_search"):
         bot.say(data["reply_target"], "No thanks.")
         return
     r = list(LogMessage.select()

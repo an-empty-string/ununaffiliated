@@ -5,7 +5,8 @@ import operator
 def rpn(bot, data, args):
     stack = []
     operators = {"+": (operator.add, 2), "-": (operator.sub, 2), "*": (operator.mul, 2), "/": (operator.truediv, 2)}
-    special = {"f": reversed}
+    registers = {}
+    special = {"flip": reversed, "substack": lambda k: [k], "reg": lambda x: store_reg(registers, x)}
     for i in args:
         if all(k in "0123456789." for k in i) and i.count(".") <= 1 and ("-" not in i[1:]):
             stack.append(float(i))
