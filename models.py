@@ -39,4 +39,8 @@ class TrackingEntry(BaseModel):
 class InventoryItem(BaseModel):
     thing = TextField()
 
-tables = [PermissionMapping, ChannelConfig, LogMessage, TrackingEntry]
+class RememberedThing(BaseModel):
+    key = TextField()
+    value = TextField()
+
+tables = [PermissionMapping, ChannelConfig, LogMessage, TrackingEntry, RememberedThing]

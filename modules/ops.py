@@ -40,7 +40,7 @@ def kick(bot, data, args):
 def kickban(bot, data, args):
     reason = "{} ({})".format(args[1], data["user"].nick) if len(args) == 2 else "no reason specified ({})".format(data["user"].nick)
     op_queue[data["reply_target"]].append("KICK {} {} :{}".format(data["reply_target"], args[0], reason))
-    op_queue[data["reply_target"]].append("MODE {} +b *!*@{}".format(data["reply_target"], tracking.get_user(args[0]).host))
+    op_queue[data["reply_target"]].append("MODE {} +b *!*@{}".format(data["reply_target"], tracking.get_user(data["message"], args[0]).host))
     request_or_use_op(bot, data["reply_target"])
 
 @command("op", (0, 1), {"op"})

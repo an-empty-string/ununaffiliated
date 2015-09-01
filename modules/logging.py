@@ -6,6 +6,7 @@ from modules.commands import command
 from models import LogMessage, TrackingEntry
 
 import chanconfig
+import random
 import redis
 r = redis.StrictRedis()
 p = r.pubsub()
@@ -22,13 +23,13 @@ def on_part(message, user, channel, reason):
 
 def on_quit(message, user, reason):
     r.publish("gone", user.nick)
-    for channel in tracking.get_user(user.hostmask).channels:
+    for channel in tracking.get_user(message).channels:
         LogMessage.create(mtype="quit", hostmask=user.hostmask, channel=channel, reason=reason)
     TrackingEntry.create(nick=user.nick, user=user.user, host=user.host, mtype="quit", channel="*")
 
 def on_nick(message, user, new_nick):
     r.publish("gone", user.nick)
-    for channel in tracking.get_user(new_nick).channels:
+    for channel in tracking.get_user(message, new_nick).channels:
         LogMessage.create(mtype="nick", hostmask=user.hostmask, channel=channel, message=new_nick)
 
 connect_signal("public-message", on_pubmsg)

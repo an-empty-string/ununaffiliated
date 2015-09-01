@@ -34,7 +34,7 @@ def dispatch_command(data):
         if disabled and not command_info.flags & Flags.BYPASS_ENABLE:
             return
 
-        account = tracking.get_user(data["user"].hostmask).account
+        account = tracking.get_user(data["message"], data["user"].hostmask).account
         if not account:
             if disabled:
                 return

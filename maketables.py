@@ -3,7 +3,7 @@ import peewee
 import re
 from models import tables
 from config import database
-import chanconfig
+import utils.chanconfig
 
 try:
     database.drop_tables(tables)
