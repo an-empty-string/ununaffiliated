@@ -1,11 +1,9 @@
 from asyncirc.plugins import tracking
 from bot import connect_signal
 from models import PermissionMapping
-import asyncio
 import chanconfig
 import collections
 import fnmatch
-import inspect
 import os
 import shlex
 import tempfile
@@ -69,7 +67,7 @@ def dispatch_command(data):
                 t = threading.Thread(target=command_info.function, args=(bot, data, args))
                 t.start()
             else:
-                ret = command_info.function(bot, data, args)
+                command_info.function(bot, data, args)
         except Exception as e:
             if disabled:
                 return

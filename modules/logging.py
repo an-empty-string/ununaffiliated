@@ -6,7 +6,6 @@ from modules.commands import command
 from models import LogMessage, TrackingEntry
 
 import chanconfig
-import random
 
 def on_pubmsg(message, user, target, text):
     if target == "#tjhsst" and user.nick == "wzhang" and "wait" in text.lower():
