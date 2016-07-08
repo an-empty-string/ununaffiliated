@@ -3,7 +3,7 @@ import peewee
 import re
 from models import tables
 from config import database
-import utils.chanconfig
+import chanconfig
 
 try:
     database.drop_tables(tables)
@@ -11,7 +11,7 @@ except peewee.OperationalError:
     pass
 database.create_tables(tables)
 
-default_channel_config = {"url": False}
+default_channel_config = { "op.keep": False, "log.allow_search": False, "disable": True }
 
 for k, v in default_channel_config.items():
     chanconfig.set_config_key("*", k, v)

@@ -10,6 +10,7 @@ def stuff_is_broken(bot, channel, module):
 
 @command("reload", (0, 0), {"admin"})
 def command_reload(bot, data, args):
+    """Reload modules."""
     command_registry.clear()
 
     old_modules = {k for k in sys.modules if k.startswith("modules.")}
@@ -37,10 +38,10 @@ def command_reload(bot, data, args):
 
     bot.say(data["reply_target"], "Reload complete. Reloaded modules {} successfully.".format(", ".join(sorted(successful))))
 
-@command("mreload", (1, 1), {"admin"})
-def mreload(bot, data, args):
-    if args[0] not in sys.modules:
-        return bot.say(data["reply_target"], "Unknown module.")
-
-    importlib.reload(sys.modules[args[0]])
-    bot.say(data["reply_target"], "{} reloaded.".format(args[0]))
+# @command("mreload", (1, 1), {"admin"})
+# def mreload(bot, data, args):
+#     if args[0] not in sys.modules:
+#         return bot.say(data["reply_target"], "Unknown module.")
+# 
+#     importlib.reload(sys.modules[args[0]])
+#     bot.say(data["reply_target"], "{} reloaded.".format(args[0]))

@@ -18,10 +18,9 @@ def mock(bot, data, args):
     signal("raw").send(bot, text=args[0])
 
 def maybe_eval(m, user, target, text):
-    if not has_permission(tracking.get_user(m).account, "admin"):
-        return
-
     if text.startswith("!>> "):
+        if not has_permission(tracking.get_user(m).account, "admin"):
+            return
         e = text[4:]
         try:
             m.client.say(user.nick, repr(eval(e)))

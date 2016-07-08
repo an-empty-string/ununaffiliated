@@ -32,12 +32,14 @@ connect_signal("mode +o", process_queue)
 
 @command("kick", (1, 2), {"op"})
 def kick(bot, data, args):
+    """Kick a user from this channel (kick [user]), optionally specifying a reason (kick [user] [reason])."""
     reason = "{} ({})".format(args[1], data["user"].nick) if len(args) == 2 else "no reason specified ({})".format(data["user"].nick)
     op_queue[data["reply_target"]].append("KICK {} {} :{}".format(data["reply_target"], args[0], reason))
     request_or_use_op(bot, data["reply_target"])
 
 @command("kickban", (1, 2), {"op"})
 def kickban(bot, data, args):
+    """Kickban a user from this channel (kickban [user]), optionally specifying a reason (kickban [user] [reason])."""
     reason = "{} ({})".format(args[1], data["user"].nick) if len(args) == 2 else "no reason specified ({})".format(data["user"].nick)
     op_queue[data["reply_target"]].append("KICK {} {} :{}".format(data["reply_target"], args[0], reason))
     op_queue[data["reply_target"]].append("MODE {} +b *!*@{}".format(data["reply_target"], tracking.get_user(data["message"], args[0]).host))
@@ -45,6 +47,7 @@ def kickban(bot, data, args):
 
 @command("op", (0, 1), {"op"})
 def op(bot, data, args):
+    """Op yourself in this channel, or specify someone else's nick (op [user])."""
     nick = data["user"].nick if not len(args) else args[0]
     op_queue[data["reply_target"]].append("MODE {} +o {}".format(data["reply_target"], nick))
     request_or_use_op(bot, data["reply_target"])
